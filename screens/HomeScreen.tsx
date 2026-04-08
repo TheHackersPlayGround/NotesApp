@@ -207,7 +207,7 @@ export default function HomeScreen() {
       )}
 
       {/* 4. Animated Quote Footer Section */}
-      <View style={[s.w100, s.p3, s.alignItemsCenter, { position: 'absolute', bottom: 0, backgroundColor: '#f8f9fa' }]}>
+      <View style={[s.w100, s.p3, s.alignItemsCenter, { position: 'absolute', bottom: 10, backgroundColor: '#f8f9fa' }]}>
         <Animated.View key={quoteIndex} entering={FadeIn.duration(1000)} exiting={FadeOut.duration(1000)}>
           <Text style={[s.textMuted, s.textCenter, { fontSize: 11, fontStyle: 'italic', fontFamily: 'serif' }]}>{quotes[quoteIndex]}</Text>
         </Animated.View>
