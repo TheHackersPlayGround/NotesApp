@@ -1,9 +1,12 @@
 import { router } from 'expo-router';
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, View, TouchableOpacity, Alert } from 'react-native';
+import { View, TouchableOpacity, Alert } from 'react-native';
 import { Button, Text, TextInput } from 'react-native-paper';
 import Animated, { FadeInUp } from 'react-native-reanimated';
 import { loginUser } from '@shared-api/postsApi';
+
+// Import Bootstrap utilities
+import { s, c } from '../styles/bootstrap';
 
 export default function LoginScreen() {
   const [email, setEmail] = useState('');
@@ -31,7 +34,6 @@ export default function LoginScreen() {
       }
       
       currentIndex = isDeleting ? currentIndex - 1 : currentIndex + 1;
-      
       timeoutId = setTimeout(typeLoop, speed);
     };
 
@@ -63,101 +65,76 @@ export default function LoginScreen() {
   };
 
   return (
-    <View style={styles.container}>
-      <View style={styles.mainContent}>
-        <Text style={styles.title}>{displayedTitle}<Text style={{ color: '#08c2f6' }}>|</Text></Text>
-        <Text variant="titleMedium" style={styles.subtitle}>Sign in to continue</Text>
+    <View style={[s.flex1, s.bgWhite]}>
+      {/* Main Content Area - Bootstrap Center Alignment */}
+      <View style={[s.flex1, s.justifyContentCenter, s.p4]}>
         
-        <Animated.View entering={FadeInUp.duration(1000).delay(300)} style={styles.form}>
-          <TextInput 
-            label="Email Address" 
-            value={email} 
-            onChangeText={setEmail} 
-            mode="outlined" 
-            style={styles.input} 
-            theme={{ roundness: 12 }} 
-            autoCapitalize="none" 
-            keyboardType="email-address" 
-          />
-          
-          <TextInput 
-            label="Password" 
-            value={password} 
-            onChangeText={setPassword} 
-            secureTextEntry={!showPassword} 
-            mode="outlined" 
-            style={styles.input} 
-            theme={{ roundness: 12 }} 
-            right={
-              <TextInput.Icon 
-                icon={showPassword ? "eye-off" : "eye"} 
-                onPress={() => setShowPassword(!showPassword)} 
-              />
-            } 
-          />
-          
-          <Button 
-            mode="contained" 
-            onPress={handleLogin} 
-            loading={loading} 
-            style={styles.button} 
-            buttonColor="#1979d2"
-          >
-            Login
-          </Button>
-          
-          <View style={styles.signupContainer}>
-            <Text style={{ color: '#757575' }}>Don't have an account? </Text>
-            <TouchableOpacity onPress={() => router.push('./register')}>
-              <Text style={styles.signupText}>Create Account</Text>
-            </TouchableOpacity>
+        {/* Animated Title */}
+        <Text style={[s.textCenter, s.mb4, s.fontWeightBold, s.textPrimary, { fontSize: 42 }]}>
+          {displayedTitle}
+          <Text style={{ color: c.INFO }}>|</Text>
+        </Text>
+        
+        <Text style={[s.textCenter, s.textDark, s.mb3, { marginTop: -20, fontSize: 16 }]}>
+          Sign in to continue
+        </Text>
+        
+        <Animated.View entering={FadeInUp.duration(1000).delay(300)}>
+          <View style={{ gap: 15 }}>
+            <TextInput 
+              label="Email Address" 
+              value={email} 
+              onChangeText={setEmail} 
+              mode="outlined" 
+              style={s.bgWhite} 
+              theme={{ roundness: 12 }} 
+              autoCapitalize="none" 
+              keyboardType="email-address" 
+            />
+            
+            <TextInput 
+              label="Password" 
+              value={password} 
+              onChangeText={setPassword} 
+              secureTextEntry={!showPassword} 
+              mode="outlined" 
+              style={s.bgWhite} 
+              theme={{ roundness: 12 }} 
+              right={
+                <TextInput.Icon 
+                  icon={showPassword ? "eye-off" : "eye"} 
+                  onPress={() => setShowPassword(!showPassword)} 
+                />
+              } 
+            />
+            
+            <Button 
+              mode="contained" 
+              onPress={handleLogin} 
+              loading={loading} 
+              style={[s.mt1, s.rounded]} 
+              buttonColor={c.PRIMARY}
+              contentStyle={{ paddingVertical: 5 }}
+            >
+              Login
+            </Button>
+            
+            <View style={[s.flexRow, s.justifyContentCenter, s.mt3]}>
+              <Text style={s.textMuted}>Don't have an account? </Text>
+              <TouchableOpacity onPress={() => router.push('./register')}>
+                <Text style={[s.textPrimary, s.fontWeightBold]}>Create Account</Text>
+              </TouchableOpacity>
+            </View>
           </View>
         </Animated.View>
       </View>
 
-      <View style={styles.footer}>
-        <Text style={styles.footerText}>All Rights Reserved 2026</Text>
-        <Text style={styles.developerText}>
-          Developed by <Text style={styles.developerName}>MeowsterChief</Text>
+      <View style={[s.alignItemsCenter, s.mb4, { paddingBottom: 20 }]}>
+        <Text style={[{ fontSize: 12 }, s.textMuted]}>All Rights Reserved 2026</Text>
+        <Text style={[{ fontSize: 12 }, s.textMuted, s.mt1]}>
+          Developed by <Text style={[s.fontWeightBold, s.textPrimary]}>MeowsterChief</Text>
         </Text>
       </View>
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  container: { 
-    flex: 1, 
-    backgroundColor: '#fefffe' 
-  },
-  mainContent: { 
-    flex: 1, 
-    justifyContent: 'center', 
-    padding: 32 
-  },
-  title: { textAlign: 'center', marginBottom: 48, fontWeight: 'bold', color: '#08c2f6', fontSize: 42 },
-  subtitle: { marginBottom: 10, marginTop: -15, color: '#282727', textAlign: 'center' },
-  form: { gap: 15 },
-  input: { backgroundColor: 'transparent' },
-  button: { marginTop: 5, borderRadius: 12 },
-  signupContainer: { flexDirection: 'row', justifyContent: 'center', marginTop: 20 },
-  signupText: { color: '#08c2f6', fontWeight: 'bold' },
-  
-  footer: {
-    paddingBottom: 40,
-    alignItems: 'center',
-  },
-  footerText: {
-    fontSize: 12,
-    color: '#9e9e9e',
-  },
-  developerText: {
-    fontSize: 12,
-    color: '#757575',
-    marginTop: 2,
-  },
-  developerName: {
-    fontWeight: 'bold',
-    color: '#08c2f6',
-  }
-});
