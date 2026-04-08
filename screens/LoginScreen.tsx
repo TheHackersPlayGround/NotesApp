@@ -1,12 +1,12 @@
+import { loginUser } from '@shared-api/postsApi';
 import { router } from 'expo-router';
-import React, { useState, useEffect } from 'react';
-import { View, TouchableOpacity, Alert } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { Alert, TouchableOpacity, View } from 'react-native';
 import { Button, Text, TextInput } from 'react-native-paper';
 import Animated, { FadeInUp } from 'react-native-reanimated';
-import { loginUser } from '@shared-api/postsApi';
 
 // Import Bootstrap utilities
-import { s, c } from '../styles/bootstrap';
+import { c, s } from '../styles/bootstrap';
 
 export default function LoginScreen() {
   const [email, setEmail] = useState('');
@@ -108,6 +108,14 @@ export default function LoginScreen() {
               } 
             />
             
+            <View style={{ alignItems: 'flex-end', marginTop: -5, marginBottom: 5 }}>
+              <TouchableOpacity onPress={() => router.push('./forgotpassword')}>
+                <Text style={[s.textPrimary, s.fontWeightBold, { fontSize: 14 }]}>
+                  Forgot Password?
+                </Text>
+              </TouchableOpacity>
+            </View>
+
             <Button 
               mode="contained" 
               onPress={handleLogin} 
@@ -130,7 +138,7 @@ export default function LoginScreen() {
       </View>
 
       <View style={[s.alignItemsCenter, s.mb4, { paddingBottom: 20 }]}>
-        <Text style={[{ fontSize: 12 }, s.textMuted]}>All Rights Reserved 2026</Text>
+        <Text style={[{ fontSize: 12 }, s.textMuted]}>© 2026 All Rights Reserved</Text>
         <Text style={[{ fontSize: 12 }, s.textMuted, s.mt1]}>
           Developed by <Text style={[s.fontWeightBold, s.textPrimary]}>MeowsterChief</Text>
         </Text>

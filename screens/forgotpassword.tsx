@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from 'react';
-import { View, TouchableOpacity, Alert } from 'react-native';
-import { Button, Text, TextInput } from 'react-native-paper';
 import { router } from 'expo-router';
+import React, { useEffect, useState } from 'react';
+import { Alert, TouchableOpacity, View } from 'react-native';
+import { Button, Text, TextInput } from 'react-native-paper';
 import Animated, { FadeInUp } from 'react-native-reanimated';
 
 // Import your Bootstrap utilities
-import { s, c } from '../styles/bootstrap';
+import { c, s } from '../styles/bootstrap';
 
 export default function ForgotPasswordScreen() {
   const [email, setEmail] = useState('');

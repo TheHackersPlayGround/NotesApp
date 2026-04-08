@@ -1,15 +1,20 @@
-import { router, useLocalSearchParams } from 'expo-router';
-import { useEffect, useState, useCallback, useMemo } from 'react';
-import { ActivityIndicator, FlatList, View, TouchableOpacity, RefreshControl, ScrollView } from 'react-native';
-import { Card, FAB, Text, TextInput, Button, Modal, Portal, Avatar, Menu, IconButton, Divider } from 'react-native-paper';
-import Animated, { 
-  useSharedValue, useAnimatedStyle, withRepeat, withTiming, withSequence, FadeIn, FadeOut 
-} from 'react-native-reanimated';
 import { useIsFocused } from '@react-navigation/native';
-import { fetchPosts, createPost, updatePost, deletePost, Post } from '@shared-api/postsApi';
+import { createPost, deletePost, fetchPosts, Post, updatePost } from '@shared-api/postsApi';
+import { router, useLocalSearchParams } from 'expo-router';
+import { useCallback, useEffect, useMemo, useState } from 'react';
+import { ActivityIndicator, FlatList, RefreshControl, ScrollView, TouchableOpacity, View } from 'react-native';
+import { Avatar, Button, Card, Divider, FAB, IconButton, Menu, Modal, Portal, Text, TextInput } from 'react-native-paper';
+import Animated, {
+  FadeIn, FadeOut,
+  useAnimatedStyle,
+  useSharedValue,
+  withRepeat,
+  withSequence,
+  withTiming
+} from 'react-native-reanimated';
 
 // Import Bootstrap utilities
-import { s, c } from '../styles/bootstrap'; 
+import { c, s } from '../styles/bootstrap';
 
 // 1. The Quotes Array
 const quotes = [
@@ -147,7 +152,13 @@ export default function HomeScreen() {
             <Text variant="bodyMedium" numberOfLines={2} style={[s.textMuted, s.mt1]}>{item.body}</Text>
             <View style={[s.mt2, { borderTopWidth: 0.5, borderTopColor: '#EEE', paddingTop: 5 }, s.flexRow]}>
               <Text style={[{ fontSize: 10 }, s.textMuted]}>Created: {formatDate(item.created_at)}</Text>
-              {isModified && <Text style={[{ fontSize: 10, color: c.PRIMARY, marginLeft: 5 }]}>• Edited: {formatDate(item.updated_at)}</Text>}
+              
+              {isModified ? (
+                <Text style={[{ fontSize: 10, color: c.PRIMARY, marginLeft: 5 }]}>
+                  • Edited: {formatDate(item.updated_at)}
+                </Text>
+              ) : null}
+
             </View>
           </Card.Content>
         </Card>

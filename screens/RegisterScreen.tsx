@@ -1,11 +1,11 @@
+import { registerUser } from '@shared-api/postsApi';
 import { router } from 'expo-router';
-import React, { useState, useEffect } from 'react';
-import { View, TouchableOpacity, ScrollView, Alert } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { Alert, ScrollView, TouchableOpacity, View } from 'react-native';
 import { Button, Text, TextInput } from 'react-native-paper';
 import Animated, { FadeInUp } from 'react-native-reanimated';
-import { registerUser } from '@shared-api/postsApi';
 
-import { s, c } from '../styles/bootstrap';
+import { c, s } from '../styles/bootstrap';
 
 export default function RegisterScreen() {
   const [name, setName] = useState('');
@@ -167,9 +167,9 @@ export default function RegisterScreen() {
 
         {/* Footer Branding inside ScrollView to ensure it moves with keyboard if needed */}
         <View style={[s.alignItemsCenter, s.mt5, { paddingBottom: 20 }]}>
-          <Text style={[{ fontSize: 12 }, s.textMuted]}>All Rights Reserved 2026</Text>
+          <Text style={[{ fontSize: 12 }, s.textMuted]}>© 2026 All Rights Reserved</Text>
           <Text style={[{ fontSize: 12 }, s.textMuted, s.mt1]}>
-            Developed by <Text style={[s.fontWeightBold, s.textPrimary]}>Neil Micarandayo</Text>
+            Developed by <Text style={[s.fontWeightBold, s.textPrimary]}>MeowsterChief</Text>
           </Text>
         </View>
 
